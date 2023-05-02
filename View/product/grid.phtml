@@ -1,0 +1,62 @@
+<?php
+require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Product </title>
+</head>
+<body>
+		<div class="row mt-3">
+		<div class="col-9">
+			<h3>Manage Product</h3>
+		</div>
+		<div class="col-3">
+			 <button class="btn btn-info"> <a href="index.php?c=Product&a=add">ADD</a> </button>
+	</div>
+		
+			</div>
+
+		</tr>
+	<table class="table table-bordered w-100">
+		<tr>
+			<th>PRODUCT ID</th>
+			<th>PRODUCT NAME</th>
+			<th>COST</th>
+			<th>PRICE</th>
+			<th>SKU</th>
+			<th>STATUS</th>
+			<th>DISCRIPTION</th>
+			<th>COLOR</th>
+			<th>MATERIAL</th>
+			<th>CREATED AT</th>
+			<th>UPDATED AT</th>
+			<th>EDIT</th>
+			<th>DELETE</th>
+		</tr>
+	<?php foreach ($products as $value): ?>
+		<tr>
+			<td><?php echo $value['product_id']; ?></td>
+			<td><?php echo $value['name']; ?></td>
+			<td><?php echo $value['cost']; ?></td>
+			<td><?php echo $value['price']; ?></td>
+			<td><?php echo $value['sku']; ?></td>
+			<td><?php echo $value['status']; ?></td>
+			<td><?php echo $value['description']; ?></td>
+			<td><?php echo $value['color']; ?></td>
+			<td><?php echo $value['material']; ?></td>
+			<td><?php echo $value['create_at']; ?></td>
+			<td><?php echo $value['update_at']; ?></td>
+			<td> <a href="index.php?c=Product&a=edit&product_id=<?php echo $value['product_id']; ?>">EDIT</a> </td>
+			<td> <a href="index.php?c=Product&a=delete&product_id=<?php echo $value['product_id']; ?>">DELETE</a> </td>
+		</tr>
+	<?php endforeach; ?>
+	</table>
+
+
+</body>
+</html>

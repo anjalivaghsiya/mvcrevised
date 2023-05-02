@@ -1,0 +1,82 @@
+<?php
+require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>edit prodcut</title>
+</head>
+<body>
+	<form action="index.php?c=product&a=insert" method="POST">
+		<div class="row mt-3">
+			<div class="col-3">
+				<h3>EDIT PRODUCT</h3>
+			</div>
+			<div class="col-3">
+				<button class="btn btn-primary">save</button>
+			</div>
+			
+		</div>
+		
+
+		<table>
+			<tr>
+				<td>Name :</td>
+				<td>
+					<input type="text" name="product[name]"></td>
+			</tr>
+			<tr>
+				<td>Sku :</td>
+				<td>
+					<input type="text" name="product[sku]">	</td>
+			</tr>
+			<tr>
+				<td>Cost :</td>
+				<td>
+					<input type="text" name="product[cost]"	>	</td>
+			</tr>
+			<tr>
+				<td>Price :</td>
+				<td>
+					<input type="text" name="product[price]"></td>
+			</tr>
+			<tr>
+				<td>Quantity :</td>
+				<td>
+					<input type="text" name="product[quantity]">
+				</td>
+			</tr>
+			<tr>
+				<td>Description :</td>
+				<td>
+					<input type="text" name="product[description]">
+				</td>
+			</tr>
+			<tr>
+				<td>Status :</td>
+				<td>
+					<input type="text" name="product[status]"></td>
+			</tr>
+			<tr>
+				<td>Color :</td>
+				<td>
+					<input type="text" name="product[color]"></td>
+			</tr>
+			<tr>
+				<td>Material :</td>
+				<td>
+					<input type="text" name="product[material]">
+				</td>
+			</tr>
+			
+		</table>
+
+
+		
+	</form>
+
+</body>
+</html>

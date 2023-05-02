@@ -1,0 +1,87 @@
+<?php
+require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>edit prodcut</title>
+</head>
+<body>
+	<form action="index.php?c=product&a=update&product_id=<?php echo $productRow['product_id'] ?>" method="POST">
+		<div class="row mt-3">
+			<div class="col-3">
+				<h3>EDIT PRODUCT</h3>
+			</div>
+			<div class="col-3">
+				<button class="btn btn-primary">save</button>
+			</div>
+		</div>
+		
+
+		<table>
+			<tr>
+				<td>Name :</td>
+				<td>
+					<input type="text" name="product[name]" value="<?php echo $productRow['name']; ?>">
+				</td>
+			</tr>
+			<tr>
+				<td>Sku :</td>
+				<td>
+					<input type="text" name="product[sku]" value="<?php echo $productRow['sku']; ?>">
+				</td>
+			</tr>
+			<tr>
+				<td>Cost :</td>
+				<td>
+					<input type="text" name="product[cost]" value="<?php echo $productRow['cost']; ?>">
+				</td>
+			</tr>
+			<tr>
+				<td>Price :</td>
+				<td>
+					<input type="text" name="product[price]" value="<?php echo $productRow['price']; ?>">
+				</td>
+			</tr>
+			<tr>
+				<td>Quantity :</td>
+				<td>
+					<input type="text" name="product[quantity]" value="<?php echo $productRow['quantity']; ?>">
+				</td>
+			</tr>
+			<tr>
+				<td>Description :</td>
+				<td>
+					<input type="text" name="product[description]" value="<?php echo $productRow['description']; ?>">
+				</td>
+			</tr>
+			<tr>
+				<td>Status :</td>
+				<td>
+					<input type="text" name="product[status]" value="<?php echo $productRow['status']; ?>">
+				</td>
+			</tr>
+			<tr>
+				<td>Color :</td>
+				<td>
+					<input type="text" name="product[color]" value="<?php echo $productRow['color']; ?>">
+				</td>
+			</tr>
+			<tr>
+				<td>Material :</td>
+				<td>
+					<input type="text" name="product[material]" value="<?php echo $productRow['material']; ?>">
+				</td>
+			</tr>
+			
+		</table>
+
+
+		
+	</form>
+
+</body>
+</html>

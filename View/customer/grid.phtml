@@ -1,0 +1,58 @@
+<?php
+require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>customer </title>
+</head>
+<body>
+		<div class="row mt-3">
+		<div class="col-9">
+			<h3>Manage Customer</h3>
+		</div>
+		<div class="col-3">
+			 <button class="btn btn-info"> <a href="index.php?c=customer&a=add">ADD</a> </button>
+	</div>
+		
+			</div>
+
+		</tr>
+	<table class="table table-bordered w-100">
+		<tr>
+			<th>CUSTOMER ID</th>
+			<th>FIRST NAME</th>
+			<th>LAST NAME</th>
+			<th>EMAIL</th>
+			<th>GENDER</th>
+			<th>MOBILE</th>
+			<th>STATUS</th>
+			<th>CREATED AT</th>
+			<th>UPDATED AT</th>
+			<th>EDIT</th>
+			<th>DELETE</th>
+		</tr>
+	<?php foreach ($customers as $customer): ?>
+		<tr>
+			<td><?php echo $customer['customer_id']; ?></td>
+			<td><?php echo $customer['fname']; ?></td>
+			<td><?php echo $customer['lname']; ?></td>
+			<td><?php echo $customer['email']; ?></td>
+			<td><?php echo $customer['gender']; ?></td>
+			<td><?php echo $customer['mobile']; ?></td>
+			<td><?php echo $customer['status']; ?></td>
+			<td><?php echo $customer['create_at']; ?></td>
+			<td><?php echo $customer['update_at']; ?></td>
+			<td> <a href="index.php?c=customer&a=edit&customer_id=<?php echo $customer['customer_id']; ?>">EDIT</a> </td>
+			<td> <a href="index.php?c=customer&a=delete&customer_id=<?php echo $customer['customer_id']; ?>">DELETE</a> </td>
+		</tr>
+	<?php endforeach; ?>
+	</table>
+
+
+</body>
+</html>
