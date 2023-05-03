@@ -7,9 +7,10 @@ class Controller_Product extends Controller_Core_Action
 	
 	public function gridAction()
 	{
+		
 			$query = "SELECT * FROM `product`";
-			$adapter = $this->getAdapter();
-			$products = $adapter->fetchAll($query);
+			$row = Ccc::getModel('Product_Row');
+			$products = $row->load(261);
 			if (!$products) {
 				throw new Exception("products not found.", 1);
 			}
