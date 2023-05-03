@@ -55,7 +55,9 @@ public function update($query)
 {
 	$connect = $this->connect();
 	$result = $connect->query($query);
+	print_r($result);
 	if (!$result) {
+		echo "string";
 			return false;
 	}
 	return $result;
@@ -67,7 +69,7 @@ public function delete($query)
 	$result = $connect->query($query);
 
 	if (!$result) {
-		return false;
+	return false;
 	}
 	return $result;
 }

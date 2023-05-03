@@ -40,7 +40,7 @@ require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
 		</tr>
 	<?php foreach ($products as $value): ?>
 		<tr>
-			<td><?php echo $value['product_id']; ?></td>
+			<td><?php echo $value->product_id; ?></td>
 			<td><?php echo $value['name']; ?></td>
 			<td><?php echo $value['cost']; ?></td>
 			<td><?php echo $value['price']; ?></td>
