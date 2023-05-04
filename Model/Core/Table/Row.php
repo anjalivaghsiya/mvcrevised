@@ -80,7 +80,7 @@ class Model_Core_Table_Row
 
 	public function setData(array $data)
 	{
-		$this->data = $data;
+		$this->data = array_merge($this->data, $data);
 		return $this;
 	}
 
@@ -159,8 +159,8 @@ class Model_Core_Table_Row
 			$column = $this->getPrimaryKey();
 		}
 		$query = "SELECT * FROM `{$this->getTableName()}` WHERE `{$column}` = '{$id}'";
-		// print_r($query);
 		$result = $this->getTable()->fetchRow($query);
+		// print_r($result);
 		if ($result) 
 		{
 			$this->data = $result;

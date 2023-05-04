@@ -9,6 +9,7 @@ class Controller_Core_Action
 	public $adapter = null;
 	public $url = null;
 	public $request = null;
+	public $view = null;
 
 	public function setRequest(Model_Core_Request $request)
 	{
@@ -57,5 +58,31 @@ class Controller_Core_Action
 	{
 		$this->url = $url;
 		return $this;
+	}
+
+	public function getView()
+	{
+		if ($this->view) {
+			return $this->view;
+		}
+		$view = new Model_Core_View();
+		$this->setView($view);
+		return $view;
+	}
+
+	public function setView($view)
+	{
+		$this->view = $view;
+		return $this;
+	}
+
+	public function render()
+	{
+		return $this->getView()->render();
+	}
+
+	public function getTemplete($templetePath)
+	{
+ 		require_once 'View'.DS.$templetePath;
 	}
 }

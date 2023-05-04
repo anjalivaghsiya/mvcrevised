@@ -81,7 +81,7 @@ class Model_Core_Table
 		$keys = "`".implode("`,`", array_keys($data))."`";
 		$values = "'".implode("','", array_values($data))."'";
 
-		$query = "INSERT INTO `{$this->TableName()}` ({$keys}) VALUES ({$values})";
+		$query = "INSERT INTO `{$this->getTableName()}` ({$keys}) VALUES ({$values})";
 
 		return $this->getAdapter()->insert($query);
 
@@ -100,7 +100,7 @@ class Model_Core_Table
 			foreach ($condition as $key => $value) {
 				$conditions[] = "`$key`='$value'";
 			}
-		$query = "UPDATE  `{$this->TableName()}` SET".implode(',', $where)."WHERE".implode('AND', $conditions);
+		$query = "UPDATE  `{$this->getTableName()}` SET".implode(',', $where)."WHERE".implode('AND', $conditions);
 		}
 		else{
 		$query = "UPDATE `{$this->getTableName()}` SET".implode(',',$where).
@@ -113,6 +113,12 @@ class Model_Core_Table
 	{
 		echo $query = "DELETE FROM `{$this->getTableName()}` WHERE `{$this->getPrimaryKey()}` = '$condition'";
 		return $this->getAdapter()->delete($query);
+	}
+
+	public function load($id)
+	{
+		 $query = "SELECT * FROM `{$this->tablename}` WHERE `{$this->primarykey}` = '{$id}' ";
+		return $this->getAdapter()->fetchRow($query);
 	}
 
 }
