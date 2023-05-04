@@ -7,15 +7,18 @@ class Controller_Product extends Controller_Core_Action
 	
 	public function gridAction()
 	{
-		
-			$query = "SELECT * FROM `product`";
+
 			$row = Ccc::getModel('Product_Row');
-			$products = $row->load(261);
+			$query = "SELECT * FROM `product`";
+			$products = $row->fetchAll($query);
 			if (!$products) {
 				throw new Exception("products not found.", 1);
 			}
-
-			require_once 'view/product/grid.phtml';
+			$this->getView()->setTemplate('product/grid.phtml')->setData($products);
+			$this->render();
+			// $products= $this->getData();
+			// print_r($products);die();
+			// require_once 'view/';
 	}
 
 	public function addAction()
@@ -27,46 +30,49 @@ class Controller_Product extends Controller_Core_Action
 	{
 			$request = $this->getRequest();
 			$products = $request->getPost('product');
+			$row = Ccc::getModel('Product_Row');
 
-			$query = "INSERT INTO `product`(`name`, `cost`, `price`, `sku`, `status`, `quantity`, `description`, `color`, `material`) VALUES ('$products[name]','$products[cost]','$products[price]','$products[sku]','$products[status]','$products[quantity]','$products[description]','$products[color]','$products[material]')";
-			$adapter = $this->getAdapter();
-			$adapter->insert($query);
+			$row->setData($products)->save();
+
+			
 			header("Location:index.php?c=Product&a=grid");
 	}
 
 	public function editAction()
 	{
+		// echo "<pre>";
+			$row = Ccc::getModel('Product_Row');
 			$request = $this->getRequest();
-			$id = $request->getParam('product_id');
-			$query = "SELECT * FROM `product` WHERE `product_id`={$id}";
-			$adapter = $this->getAdapter();
-			$productRow = $adapter->fetchRow($query);
-			require_once 'view/product/edit.phtml';
+			$product_id = $request->getParam('id');
+			$product = $row->load($product_id);
+			$query = "SELECT * FROM `product` WHERE `product_id` = {$product_id} ";
+			$products = $row->fetchRow($query);
+			// print_r($products);
+			$this->getView()->setTemplate('product/edit.phtml')->setData($products);
+			$this->render();
+			// $row->setData($products);
+			// require_once 'view/product/edit.phtml';
 	}
 
 	public function updateAction()
 	{
 			$request = $this->getRequest();
+			$row = Ccc::getModel('Product_Row');
 			$products = $request->getPost('product');
 			$id = $request->getParam('product_id');
+			$row->setData($products)->save();
+			`update_at`->date('Y:m:d h:sa:i');
 
-			$query = "UPDATE 
-							`product` SET 
-							`name`='$products[name]',
-							`sku`='$products[sku]',
-							`cost`='$products[cost]',
-							`price`='$products[price]',
-							`quantity`='$products[quantity]',
-							`description`='$products[description]',
-							`status`='$products[status]',
-							`color`='$products[color]',
-							`material`='$products[material]' 
-							 -- `update_at`=current_timestamp();
-							WHERE `product_id` = {$id}";
-			$adapter = $this->getAdapter();
-			$adapter->update($query);
+
+			
+			// $adapter->update($query);
 			header("Location:index.php?c=Product&a=grid");
 	}
+
+	// public function s($value='')
+	// {
+	// 	// code...
+	// }
 
 	public function deleteAction()
 	{

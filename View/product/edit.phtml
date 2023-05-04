@@ -1,5 +1,8 @@
 <?php
+// echo "<pre>";
 require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
+$product = $this->getData();
+// print_r($product);die();
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +13,7 @@ require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
 	<title>edit prodcut</title>
 </head>
 <body>
-	<form action="index.php?c=product&a=update&product_id=<?php echo $productRow['product_id'] ?>" method="POST">
+	<form action="index.php?c=product&a=update&id=<?php echo $product->product_id ?>" method="POST">
 		<div class="row mt-3">
 			<div class="col-3">
 				<h3>EDIT PRODUCT</h3>
@@ -25,55 +28,55 @@ require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
 			<tr>
 				<td>Name :</td>
 				<td>
-					<input type="text" name="product[name]" value="<?php echo $productRow['name']; ?>">
+					<input type="text" name="product[name]" value="<?php echo $product->name; ?>">
 				</td>
 			</tr>
 			<tr>
 				<td>Sku :</td>
 				<td>
-					<input type="text" name="product[sku]" value="<?php echo $productRow['sku']; ?>">
+					<input type="text" name="product[sku]" value="<?php echo $product->sku; ?>">
 				</td>
 			</tr>
 			<tr>
 				<td>Cost :</td>
 				<td>
-					<input type="text" name="product[cost]" value="<?php echo $productRow['cost']; ?>">
+					<input type="text" name="product[cost]" value="<?php echo $product->cost; ?>">
 				</td>
 			</tr>
 			<tr>
 				<td>Price :</td>
 				<td>
-					<input type="text" name="product[price]" value="<?php echo $productRow['price']; ?>">
+					<input type="text" name="product[price]" value="<?php echo $product->price; ?>">
 				</td>
 			</tr>
 			<tr>
 				<td>Quantity :</td>
 				<td>
-					<input type="text" name="product[quantity]" value="<?php echo $productRow['quantity']; ?>">
+					<input type="text" name="product[quantity]" value="<?php echo $product->quantity; ?>">
 				</td>
 			</tr>
 			<tr>
 				<td>Description :</td>
 				<td>
-					<input type="text" name="product[description]" value="<?php echo $productRow['description']; ?>">
+					<input type="text" name="product[description]" value="<?php echo $product->description; ?>">
 				</td>
 			</tr>
 			<tr>
 				<td>Status :</td>
 				<td>
-					<input type="text" name="product[status]" value="<?php echo $productRow['status']; ?>">
+					<input type="text" name="product[status]" value="<?php echo $product->status; ?>">
 				</td>
 			</tr>
 			<tr>
 				<td>Color :</td>
 				<td>
-					<input type="text" name="product[color]" value="<?php echo $productRow['color']; ?>">
+					<input type="text" name="product[color]" value="<?php echo $product->color; ?>">
 				</td>
 			</tr>
 			<tr>
 				<td>Material :</td>
 				<td>
-					<input type="text" name="product[material]" value="<?php echo $productRow['material']; ?>">
+					<input type="text" name="product[material]" value="<?php echo $product->material; ?>">
 				</td>
 			</tr>
 			
