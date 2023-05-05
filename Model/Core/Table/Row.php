@@ -80,7 +80,7 @@ class Model_Core_Table_Row
 
 	public function setData(array $data)
 	{
-		$this->data = array_merge($this->data, $data);
+		$this->data =array_merge($this->data,$data) ;
 		return $this;
 	}
 
@@ -96,6 +96,7 @@ class Model_Core_Table_Row
 		}
 		return null;
 	}
+
 
 	public function addData($key,$value)
 	{
@@ -182,7 +183,7 @@ class Model_Core_Table_Row
 		}
 		else
 		{
-			$id = $this->getData([$this->getPrimaryKey()]);
+			$id = $this->getData($this->getPrimaryKey());
 			$update = $this->getTable()->update($this->data, $id);
 			if($update)
 			{

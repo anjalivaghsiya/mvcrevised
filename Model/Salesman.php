@@ -3,12 +3,12 @@
 /**
  * 
  */
-class Model_Product extends Model_Core_Table
+class Model_Salesman extends Model_Core_Table
 {
-	public $tableName = 'product';
-	public $primaryKey = 'product_id';
+	public $tableName = 'salesman';
+	public $primaryKey = 'salesman_id';
 
-const STATUS_ACTIVE = 1;
+	const STATUS_ACTIVE = 1;
     const STATUS_ACTIVE_LBL ='Active';
     const STATUS_INACTIVE = 2;
     const STATUS_INACTIVE_LBL ='Inactive';
@@ -22,6 +22,4 @@ const STATUS_ACTIVE = 1;
                 self::STATUS_INACTIVE=>self::STATUS_INACTIVE_LBL,
         ];
     }
-	
-	
 }
