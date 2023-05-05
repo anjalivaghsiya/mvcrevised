@@ -1,0 +1,65 @@
+<?php
+require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
+$salesmen = $this->getData();
+// print_r($salesmen);die();
+// $salesman = $row->getData();
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Salesman </title>
+</head>
+<body>
+		<div class="row mt-3">
+		<div class="col-9">
+			<h3>Manage Salesman</h3>
+		</div>
+		<div class="col-3">
+			 <button class="btn btn-info"> <a href="index.php?c=salesman&a=add">ADD SALESMAN</a> </button>
+	</div>
+		
+			</div>
+
+		</tr>
+	<table class="table table-bordered w-100">
+		<tr>
+			<th>SALESMAN ID</th>
+			<th>FIRST NAME</th>
+			<th>LAST NAME</th>
+			<th>EMAIL</th>
+			<th>GENDER</th>
+			<th>MOBILE</th>
+			<th>STATUS</th>
+			<th>COMPANY</th>
+			<th>CREATED AT</th>
+			<th>UPDATED AT</th>
+			<th>EDIT</th>
+			<th>DELETE</th>
+			<th>ADDRESS</th>
+		</tr>
+	<?php foreach ($salesmen as $salesman): ?>
+		<tr>
+			<td><?php echo $salesman->salesman_id; ?></td>
+			<td><?php echo $salesman->fname; ?></td>
+			<td><?php echo $salesman->lname; ?></td>
+			<td><?php echo $salesman->email; ?></td>
+			<td><?php echo $salesman->gender; ?></td>
+			<td><?php echo $salesman->mobile; ?></td>
+			<td><?php echo $salesman->status; ?></td>
+			<td><?php echo $salesman->company; ?></td>
+			<td><?php echo $salesman->create_at; ?></td>
+			<td><?php echo $salesman->update_at; ?></td>
+			<td> <a href="index.php?c=salesman&a=edit&id=<?php echo $salesman->salesman_id; ?>">EDIT</a> </td>
+			<td> <a href="index.php?c=salesman&a=delete&id=<?php echo $salesman->salesman_id; ?>">DELETE</a> </td>
+			<td> <a href="index.php?c=salesman_address&a=grid&id=<?php echo $salesman->salesman_id; ?>">ADDRESS</a> </td>
+		</tr>
+	<?php endforeach; ?>
+	</table>
+
+
+</body>
+</html>

@@ -23,7 +23,9 @@ class Controller_Product extends Controller_Core_Action
 
 	public function addAction()
 	{
-			require_once 'view/product/add.phtml';
+			$row = Ccc::getModel('Product_Row');
+			$this->getView()->setTemplate('product/add.phtml')->setData($row);
+			$this->render();
 	}
 
 	public function insertAction()
@@ -54,33 +56,44 @@ class Controller_Product extends Controller_Core_Action
 			// require_once 'view/product/edit.phtml';
 	}
 
-	public function updateAction()
+	public function saveAction()
 	{
-			$request = $this->getRequest();
-			$row = Ccc::getModel('Product_Row');
-			$products = $request->getPost('product');
-			$id = $request->getParam('product_id');
-			$row->setData($products)->save();
-			`update_at`->date('Y:m:d h:sa:i');
+		try {
+		$request=$this->getRequest();
+			$data = $request->getPost('product');
+			if (!$data) 
+			{
+				throw new Exception("Data not saved");
+			}
+			$id = $request->getParam('id');
+			if ($id) 
+			{
+				echo "<pre>";
+				$product=Ccc::getModel('Product_Row')->load($id);
+				$product->update_at=date('Y-m-d H:i:s');
+			}
+			else
+			{
+				$product= Ccc::getModel('Product_Row');
+				$product->create_at = date("Y-m-d h:i:s");
+			}
+			$product->setData($data);
+			$product->save();
+		}
+		catch(Exception $e){	
+				echo "catch found";
+		}
+		header("Location: index.php?c=product&a=grid");
 
-
-			
-			// $adapter->update($query);
-			header("Location:index.php?c=Product&a=grid");
 	}
-
-	// public function s($value='')
-	// {
-	// 	// code...
-	// }
 
 	public function deleteAction()
 	{
 		$request = $this->getRequest();
-		$id = $request->getParam('product_id');
-		$query = "DELETE FROM `product` WHERE `product_id` = {$id}";
-		$adapter = $this->getAdapter();
-		$adapter->update($query);
+		$id = $request->getParam('id');
+		$Row = Ccc::getModel('Product_Row');
+		$Row->load($id);
+		$Row->delete();
 		header("Location:index.php?c=Product&a=grid");
 	}
 
