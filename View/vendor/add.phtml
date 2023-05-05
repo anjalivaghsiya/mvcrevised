@@ -1,0 +1,106 @@
+<?php
+require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
+// $data = $this->getData()->getTable()->getStatusOptions();
+// print_r($data);die;
+$vendor = $this->getData();
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>edit prodcut</title>
+</head>
+<body>
+	<form action="index.php?c=vendor&a=save" method="POST">
+		<div class="row mt-3">
+			<div class="col-3">
+				<h3>EDIT VENDOR</h3>
+			</div>
+			<div class="col-3">
+				<button class="btn btn-primary">save</button>
+			</div>
+			
+		</div>
+		
+
+		<table>
+			<tr>
+				<td>FirstName :</td>
+				<td>
+					<input type="text" name="vendor[fname]"></td>
+			</tr>
+			<tr>
+				<td>LastName :</td>
+				<td>
+					<input type="text" name="vendor[lname]"></td>
+			</tr>
+			<tr>
+				<td>Email :</td>
+				<td>
+					<input type="text" name="vendor[email]">	</td>
+			</tr>
+			<tr>
+				<td>Gender :</td>
+				<td>
+					<input type="text" name="vendor[gender]"	>	</td>
+			</tr>
+			<tr>
+				<td>Mobile :</td>
+				<td>
+					<input type="text" name="vendor[mobile]"></td>
+			</tr>
+			<tr>
+					<td> Status</td>
+					<td> <select name="vendor[status]" >
+						<?php foreach ($vendor->getTable()->getStatusOptions() as $key => $value): ?>
+						<option value="<?php echo $key ?>"><?php echo $value ?></option>
+						<?php endforeach; ?>
+						
+					</select> </td>
+				</tr>
+			<tr>
+				<td>Company :</td>
+				<td>
+					<input type="text" name="vendor[company]"></td>
+			</tr>
+			
+		</table>
+
+		<table>
+			<h3>vendor ADDRESS</h3>
+			<div class="mt-3"></div>
+			<tr>
+				<td>Address :</td>
+				<td>
+					<input type="text" name="address[address]"></td>
+			</tr>
+			<tr>
+				<td>City :</td>
+				<td>
+					<input type="text" name="address[city]"></td>
+			</tr>
+			<tr>
+				<td>State :</td>
+				<td>
+					<input type="text" name="address[state]">	</td>
+			</tr>
+			<tr>
+				<td>Country :</td>
+				<td>
+					<input type="text" name="address[country]"	>	</td>
+			</tr>
+			<tr>
+				<td>Zipcode :</td>
+				<td>
+					<input type="text" name="address[zipcode]"></td>
+			</tr>
+			
+		</table>
+
+		
+	</form>
+
+</body>
+</html>

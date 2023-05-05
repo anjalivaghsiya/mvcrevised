@@ -1,0 +1,47 @@
+<?php
+require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
+$address = $this->getData();
+// $address = $row->getData();
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>address </title>
+</head>
+<body>
+		<div class="row mt-3">
+		<div class="col-9">
+			<h3>Manage address</h3>
+		</div>
+		
+			</div>
+
+		</tr>
+	<table class="table table-bordered w-100">
+		<tr>
+			<th>ADDRESS ID</th>
+			<th>ADDRESS </th>
+			<th>CITY</th>
+			<th>STATE</th>
+			<th>COUNTRY</th>
+			<th>ZIPCODE</th>
+			<th>SALESMAN ID</th>
+		</tr>
+		<tr>
+			<td><?php echo $address->address_id; ?></td>
+			<td><?php echo $address->address; ?></td>
+			<td><?php echo $address->city; ?></td>
+			<td><?php echo $address->state; ?></td>
+			<td><?php echo $address->country; ?></td>
+			<td><?php echo $address->zipcode; ?></td>
+			<td><?php echo $address->salesman_id; ?></td>
+		</tr>
+	</table>
+
+
+</body>
+</html>
