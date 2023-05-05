@@ -34,30 +34,30 @@ class Controller_Salesman extends Controller_Core_Action
 		}
 	}
 
-	public function insertAction()
-	{
-		try {
-			$Row = Ccc::getModel('Salesman_Row');
-			$addressRow = Ccc::getModel('Salesman_Address_Row');
-			$request = $this->getRequest();
-			if (!$request->isPost()) {
-				throw new Exception("Invalid request", 1);
-			}
-			$salesmen = $request->getPost('salesman');
-			$address = $request->getPost('address');
-			echo "<pre>";
-			$insertSalesman = $Row->setData($salesmen)->save();
-			$salesmanId = $insertSalesman->salesman_id;
+	// public function insertAction()
+	// {
+	// 	try {
+	// 		$Row = Ccc::getModel('Salesman_Row');
+	// 		$addressRow = Ccc::getModel('Salesman_Address_Row');
+	// 		$request = $this->getRequest();
+	// 		if (!$request->isPost()) {
+	// 			throw new Exception("Invalid request", 1);
+	// 		}
+	// 		$salesmen = $request->getPost('salesman');
+	// 		$address = $request->getPost('address');
+	// 		echo "<pre>";
+	// 		$insertSalesman = $Row->setData($salesmen)->save();
+	// 		$salesmanId = $insertSalesman->salesman_id;
 
-			$address['salesman_id'] = $salesmanId;
-			print_r($address);
+	// 		$address['salesman_id'] = $salesmanId;
+	// 		print_r($address);
 
-			$addressRow->setData($address)->save();
-			header("Location:index.php?c=salesman&a=grid");
-			} catch (Exception $e) {
-			echo "Data not inserted.";
-		}
-	}
+	// 		$addressRow->setData($address)->save();
+	// 		header("Location:index.php?c=salesman&a=grid");
+	// 		} catch (Exception $e) {
+	// 		echo "Data not inserted.";
+	// 	}
+	// }
 
 	public function editAction()
 	{
