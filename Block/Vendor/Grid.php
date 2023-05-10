@@ -3,17 +3,18 @@
 /**
  * 
  */
-class Block_Salesman_Grid extends Block_Core_Grid
+class Block_Vendor_Grid extends Block_Core_Grid
 {
 	
 	function __construct()
 	{
 		parent::__construct();
-		$this->setTitle('MANAGE SALESMAN');
+		$this->setTitle('MANAGE VENDOR');
 	}
+
 	protected function _prepareColumns()
 	{
-		$this->addColumn('salesman_id',['title'=>"SALESMAN_ID"]);
+		$this->addColumn('vendor_id',['title'=>"VENDOR_ID"]);
 		$this->addColumn('fname',['title'=>"FIRST NAME"]);
 		$this->addColumn('lname',['title'=>"LAST NAME"]);
 		$this->addColumn('email',['title'=>"EMAIL"]);
@@ -49,17 +50,17 @@ class Block_Salesman_Grid extends Block_Core_Grid
 
 	public function getEditUrl($row , $key)
 	{
-		return $this->getUrl(null, $key, ['salesman_id'=>$row->getId()], true);
+		return $this->getUrl(null, $key, ['vendor_id'=>$row->getId()], true);
 	}
 
 	public function getDeleteUrl($row , $key)
 	{
-		return $this->getUrl(null, $key, ['salesman_id'=>$row->getId()], true);
+		return $this->getUrl(null, $key, ['vendor_id'=>$row->getId()], true);
 	}
 
 	public function getAddressUrl($row , $key)
 	{
-		return $this->getUrl('salesman_Address', 'grid', ['salesman_id'=>$row->getId()], true);
+		return $this->getUrl('vendor_address', 'grid', ['vendor_id'=>$row->getId()], true);
 	}
 
 	public function getColumnValue($row , $key)
@@ -72,8 +73,8 @@ class Block_Salesman_Grid extends Block_Core_Grid
 
 	protected function _prepareButtons()
 	{
-		$this->addButton('salesman_id',[
-			'title'=>'ADD SALESMAN',
+		$this->addButton('vendor_id',[
+			'title'=>'ADD VENDOR',
 			'url'=>$this->getUrl(null, 'add')
 		]);
 		return parent::_prepareButtons();
@@ -82,8 +83,8 @@ class Block_Salesman_Grid extends Block_Core_Grid
 	public function getCollection()
 	{
 
-		$query = "SELECT * FROM `salesman`";
-		$salesmen = Ccc::getModel('Salesman_Row')->fetchAll($query);
-		return $salesmen;
+		$query = "SELECT * FROM `vendor`";
+		$vendors = Ccc::getModel('Vendor_ROw')->fetchAll($query);
+		return $vendors;
 	}
 }

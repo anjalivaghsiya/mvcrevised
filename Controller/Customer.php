@@ -102,8 +102,7 @@ class Controller_Customer extends Controller_Core_Action
 
 	public function deleteAction()
 	{
-		try {
-			$Row = Ccc::getModel('Customer_Row');
+		$Row = Ccc::getModel('Customer_Row');
 			// $addressRow = Ccc::getModel('Salesman_Address_Row');
 			$request = $this->getRequest();
 			if (!$request) {
@@ -119,11 +118,8 @@ class Controller_Customer extends Controller_Core_Action
 			// echo "<pre>";
 			// print_r($addressData);
 			$Row->delete();
-			// $addressRow->load($address_id);
-			// $addressRow->delete();
-			header("Location:index.php?c=customer&a=grid");
-		} catch (Exception $e) {
-			echo "Row not delete";
-		}
 	}
+
+	
+	
 }
