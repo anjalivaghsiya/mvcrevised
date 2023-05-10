@@ -70,7 +70,7 @@ class Controller_Customer extends Controller_Core_Action
 		{	
 			echo "Data not found";
 		}
-		header("Location: index.php?c=customer&a=grid");
+		// header("Location: index.php?c=customer&a=grid");
 	}
 
 	public function editAction()

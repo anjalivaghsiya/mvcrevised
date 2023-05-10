@@ -13,7 +13,7 @@ $address = $this->getData('salesmanAddress');
 	<title>edit salesman</title>
 </head>
 <body>
-	<form action="index.php?c=salesman&a=save&id=<?php echo $salesman->salesman_id ?>" method="POST">
+	<form action="index.php?c=salesman&a=save" method="POST">
 		<div class="row mt-3">
 			<div class="col-3">
 				<h3>EDIT SALESMAN</h3>
@@ -25,6 +25,12 @@ $address = $this->getData('salesmanAddress');
 		
 
 		<table>
+			<tr>
+				<td>Salesman_id :</td>
+				<td>
+					<input type="text" name="salesman[salesman_id]" value="<?php echo $salesman->salesman_id; ?>">
+				</td>
+			</tr>
 			<tr>
 				<td>FirstName :</td>
 				<td>
@@ -96,7 +102,7 @@ $address = $this->getData('salesmanAddress');
 					<input type="text" name="address[city]" value="<?php echo $address->city ?>"></td>
 			</tr>
 			<tr>
-				<td>Satte :</td>
+				<td>State :</td>
 				<td>
 					<input type="text" name="address[state]" value="<?php echo $address->state ?>">	</td>
 			</tr>

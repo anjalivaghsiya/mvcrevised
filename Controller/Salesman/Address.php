@@ -8,17 +8,11 @@ class Controller_Salesman_Address extends Controller_Core_Action
 	public function gridAction()
 	{
 		try {
-			$Row = Ccc::getModel('Salesman_Address_Row');
-			$request = $this->getRequest();
-			if (!$request->isGet()) {
-				throw new Exception("Invalid request", 1);
-			}
-			$salesmanId  = $request->getParam('id');
-			$query = "SELECT * FROM `salesman_address` WHERE `salesman_id` = '{$salesmanId}'";
-			$address = $Row->fetchRow($query);
+			$layout = $this->getLayout();
+			$grid = $layout->createBlock('Salesman_Address_Grid');
 
-			$this->getView()->setTemplate('salesman_address/grid.phtml')->setData($address);
-			$this->render();
+			$layout->getChild('content')->addChild('grid' , $grid);
+			$layout->render();
 			
 		} catch (Exception $e) {
 			echo "Data missed.";
