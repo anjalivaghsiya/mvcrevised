@@ -8,14 +8,10 @@ class Controller_Salesman extends Controller_Core_Action
 	public function gridAction()
 	{
 		try {
-			$Row = Ccc::getModel('Salesman_Row');
-			$query = "SELECT * FROM `salesman`";
-			$salesmen = $Row->fetchAll($query);
-			if (!$salesmen) {
-				throw new Exception("Data not found.", 1);
-			}
-			$this->getView()->setTemplate('salesman/grid.phtml')->setData($salesmen);
-			$this->render();
+			$layout = $this->getLayout();
+			$grid = $layout->createBlock('Salesman_Grid');
+			$layout->getChild('content')->addChild('grid', $grid);
+			$layout->render();
 		} catch (Exception $e) {
 			echo "Missed data.";
 		}
@@ -34,42 +30,26 @@ class Controller_Salesman extends Controller_Core_Action
 		}
 	}
 
-	// public function insertAction()
-	// {
-	// 	try {
-	// 		$Row = Ccc::getModel('Salesman_Row');
-	// 		$addressRow = Ccc::getModel('Salesman_Address_Row');
-	// 		$request = $this->getRequest();
-	// 		if (!$request->isPost()) {
-	// 			throw new Exception("Invalid request", 1);
-	// 		}
-	// 		$salesmen = $request->getPost('salesman');
-	// 		$address = $request->getPost('address');
-	// 		echo "<pre>";
-	// 		$insertSalesman = $Row->setData($salesmen)->save();
-	// 		$salesmanId = $insertSalesman->salesman_id;
-
-	// 		$address['salesman_id'] = $salesmanId;
-	// 		print_r($address);
-
-	// 		$addressRow->setData($address)->save();
-	// 		header("Location:index.php?c=salesman&a=grid");
-	// 		} catch (Exception $e) {
-	// 		echo "Data not inserted.";
-	// 	}
-	// }
-
+	
 	public function editAction()
 	{
 		try 
 		{
+			$request = $this->getrequest();
+			$salesman_id = $request->getParam('salesman_id');
+			if (!$salesman_id) {
+				throw new Exception("Invalid id.", 1);
+			}
 			$salesmanRow = Ccc::getModel('Salesman_Row');
 			$salesmanAddressRow = Ccc::getModel('Salesman_Address_Row');
-			$request = $this->getrequest();
-			$salesman_id = $request->getParam('id');
 			$salesman = $salesmanRow->load($salesman_id);
 			$salesmanAddress = $salesmanAddressRow->load($salesman_id,'salesman_id');
-			$this->getView()->setTemplate('salesman/edit.phtml')->setData(['salesman'=>$salesman, 'salesmanAddress'=>$salesmanAddress])->render();
+
+			$layout = $this->getLayout();
+			$edit = $layout->createBlock('Salesman_Edit');
+			$edit->setData(['salesman'=>$salesman, 'salesmanAddress'=>$salesmanAddress]);
+			$layout->getChild('content')->addChild('edit', $edit);
+			$layout->render();
 		} 
 		catch (Exception $e) 
 		{
@@ -79,20 +59,22 @@ class Controller_Salesman extends Controller_Core_Action
 
 	public function saveAction()
 	{
-		try
-		{
+		// try
+		// {
 			$request = $this->getRequest();
+
 			$salesmanData = $request->getPost('salesman');
-			$id=$request->getParam('id');
-			if ($id) 
+			$id=$request->getParam('salesman_id');
+			if (!$id) 
 			{
-				$salesman=Ccc::getModel('salesman_Row')->load($id);
-				$salesman->update_at=date('Y-m-d H:i:s');
+				$salesman= Ccc::getModel('Salesman_Row');
+				$salesman->create_at = date("Y-m-d h:i:s");
 			}
 			else
 			{
-				$salesman= Ccc::getModel('salesman_Row');
-				$salesman->create_at = date("Y-m-d h:i:s");
+				$salesman=Ccc::getModel('Salesman_Row')->load($id);
+				$salesman->update_at=date('Y-m-d H:i:s');
+				
 			}
 			$salesman->setData($salesmanData);
 			$salesman->save();
@@ -100,21 +82,21 @@ class Controller_Salesman extends Controller_Core_Action
 			$salesmanAddressData = $request->getpost('address');
 			if ($id = $request->getParam('id')) 
 			{
-			$salesmanAddress = Ccc::getModel('salesman_Address_Row')->load($id);
+			$salesmanAddress = Ccc::getModel('Salesman_Address_Row')->load($id);
 			}
 			else
 			{
-				$salesmanAddress = Ccc::getModel('salesman_Address_Row');
+				$salesmanAddress = Ccc::getModel('Salesman_Address_Row');
 				$salesmanAddress->salesman_id = $salesman->salesman_id;
 			}
 				$salesmanAddress->setData($salesmanAddressData);
 				$salesmanAddress->save();
-		}
-		catch(Exception $e)
-		{	
-			echo "Data not found";
-		}
-		header("Location: index.php?c=salesman&a=grid");
+		// }
+		// catch(Exception $e)
+		// {	
+		// 	echo "Data not found";
+		// }
+		// header("Location: index.php?c=salesman&a=grid");
 	}
 
 
