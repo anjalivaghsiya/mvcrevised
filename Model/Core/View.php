@@ -44,6 +44,13 @@ class Model_Core_View
  		require_once 'View'.DS.$this->getTemplate();
  	}
 
+ 	public function getUrl($action = null, $controller = null, $params = [], $reset = false)
+	{
+		$url = Ccc::getModel('Core_Url')->getUrl($action, $controller, $params, $reset);
+		return $url;
+	}
+
+
 
 }
 

@@ -1,0 +1,56 @@
+<?php
+require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
+$categories = $this->getData();
+// print_r($salesmen);die();
+// $Category = $row->getData();
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Category </title>
+</head>
+<body>
+		<div class="row mt-3">
+		<div class="col-9">
+			<h3>Manage Category</h3>
+		</div>
+		<div class="col-3">
+			 <button class="btn btn-info"> <a href="index.php?c=category&a=add">ADD CATEGORY</a> </button>
+	</div>
+		
+			</div>
+
+		</tr>
+	<table class="table table-bordered w-100">
+		<tr>
+			<th>CATEGORY ID</th>
+			<th> NAME</th>
+			<th>STATUS</th>
+			<th>DESCRIPTION</th>
+			<th>CREATED AT</th>
+			<th>UPDATED AT</th>
+			<th>EDIT</th>
+			<th>DELETE</th>
+		</tr>
+	<?php foreach ($categories as $category): ?>
+		<tr>
+			<td><?php echo $category->category_id; ?></td>
+			<td><?php echo $category->name; ?></td>
+			<td><?php echo $category->status; ?></td>
+			<td><?php echo $category->description; ?></td>
+			<td><?php echo $category->create_at; ?></td>
+			<td><?php echo $category->update_at; ?></td>
+			<td> <a href="index.php?c=category&a=edit&id=<?php echo $category->category_id; ?>">EDIT</a> </td>
+			<td> <a href="index.php?c=category&a=delete&id=<?php echo $category->category_id; ?>">DELETE</a> </td>
+			<td> <a href="index.php?c=category_address&a=grid&id=<?php echo $category->Category_id; ?>">ADDRESS</a> </td>
+		</tr>
+	<?php endforeach; ?>
+	</table>
+
+
+</body>
+</html>

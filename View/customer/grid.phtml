@@ -1,5 +1,6 @@
 <?php
 require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
+$customers = $this->getData();
 ?>
 
 
@@ -35,20 +36,22 @@ require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
 			<th>UPDATED AT</th>
 			<th>EDIT</th>
 			<th>DELETE</th>
+			<th>ADDRESS</th>
 		</tr>
 	<?php foreach ($customers as $customer): ?>
 		<tr>
-			<td><?php echo $customer['customer_id']; ?></td>
-			<td><?php echo $customer['fname']; ?></td>
-			<td><?php echo $customer['lname']; ?></td>
-			<td><?php echo $customer['email']; ?></td>
-			<td><?php echo $customer['gender']; ?></td>
-			<td><?php echo $customer['mobile']; ?></td>
-			<td><?php echo $customer['status']; ?></td>
-			<td><?php echo $customer['create_at']; ?></td>
-			<td><?php echo $customer['update_at']; ?></td>
-			<td> <a href="index.php?c=customer&a=edit&customer_id=<?php echo $customer['customer_id']; ?>">EDIT</a> </td>
-			<td> <a href="index.php?c=customer&a=delete&customer_id=<?php echo $customer['customer_id']; ?>">DELETE</a> </td>
+			<td><?php echo $customer->customer_id; ?></td>
+			<td><?php echo $customer->fname; ?></td>
+			<td><?php echo $customer->lname; ?></td>
+			<td><?php echo $customer->email; ?></td>
+			<td><?php echo $customer->gender; ?></td>
+			<td><?php echo $customer->mobile; ?></td>
+			<td><?php echo $customer->status; ?></td>
+			<td><?php echo $customer->create_at; ?></td>
+			<td><?php echo $customer->update_at; ?></td>
+			<td> <a href="index.php?c=customer&a=edit&customer_id=<?php echo $customer->customer_id; ?>">EDIT</a> </td>
+			<td> <a href="index.php?c=customer&a=delete&customer_id=<?php echo $customer->customer_id; ?>">DELETE</a> </td>
+			<td> <a href="index.php?c=customer_address&a=grid&customer_id=<?php echo $customer->customer_id; ?>">ADDRESS</a> </td>
 		</tr>
 	<?php endforeach; ?>
 	</table>

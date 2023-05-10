@@ -45,7 +45,6 @@ class Model_Core_Url
 	   return $url;
 
 	   
-
 }	  
 }
 ?>

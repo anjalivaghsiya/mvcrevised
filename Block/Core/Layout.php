@@ -8,7 +8,7 @@ class Block_Core_Layout extends Block_Core_Template
 	public function __construct()
 	{
 		parent::__construct();
-		$this->setTemplete('core/layout/3columns.phtml');
+		$this->setTemplate('core/layout/3columns.phtml');
 
 		$this->prepareChildren();
 	}
@@ -21,20 +21,20 @@ class Block_Core_Layout extends Block_Core_Template
 		$header = $this->createBlock('Html_Header');
 		$this->addChild('header',$header);
 
-		$message = $this->createBlock('Html_Message');
-		$this->addChild('message',$message);
+		// $message = $this->createBlock('Html_Message');
+		// $this->addChild('message',$message);
 
 		$content = $this->createBlock('Html_Content');
 		$this->addChild('content',$content);
 
-		$left = $this->createBlock('Html_Left');
-		$this->addChild('left', $left);
+		// $left = $this->createBlock('Html_Left');
+		// $this->addChild('left', $left);
 
-		$right = $this->createBlock('Html_Right');
-		$this->addChild('right', $right);
+		// $right = $this->createBlock('Html_Right');
+		// $this->addChild('right', $right);
 
-		$footer = $this->createBlock('Html_Footer');
-		$this->addChild('footer', $footer);
+		// $footer = $this->createBlock('Html_Footer');
+		// $this->addChild('footer', $footer);
 	}
 	
 	public function createBlock($block)
