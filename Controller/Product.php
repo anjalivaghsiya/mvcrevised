@@ -7,15 +7,21 @@ class Controller_Product extends Controller_Core_Action
 	
 	public function gridAction()
 	{
+			$layout = $this->getLayout();
+	 	 		$grid = new Block_Product_Grid();
 
-			$row = Ccc::getModel('Product_Row');
-			$query = "SELECT * FROM `product`";
-			$products = $row->fetchAll($query);
-			if (!$products) {
-				throw new Exception("products not found.", 1);
-			}
-			$this->getView()->setTemplate('product/grid.phtml')->setData($products);
-			$this->render();
+	 	 		$layout->getChild('content')->addChild('grid' , $grid);
+	 	 		// $grid->getCollection();
+	 	 		$layout->render();
+
+			// $row = Ccc::getModel('Product_Row');
+			// $query = "SELECT * FROM `product`";
+			// $products = $row->fetchAll($query);
+			// if (!$products) {
+			// 	throw new Exception("products not found.", 1);
+			// }
+			// $this->getView()->setTemplate('product/grid.phtml')->setData($products);
+			// $this->render();
 			// $products= $this->getData();
 			// print_r($products);die();
 			// require_once 'view/';
@@ -42,50 +48,63 @@ class Controller_Product extends Controller_Core_Action
 
 	public function editAction()
 	{
-		// echo "<pre>";
-			$row = Ccc::getModel('Product_Row');
-			$request = $this->getRequest();
-			$product_id = $request->getParam('id');
-			$product = $row->load($product_id);
-			$query = "SELECT * FROM `product` WHERE `product_id` = {$product_id} ";
-			$products = $row->fetchRow($query);
-			// print_r($products);
-			$this->getView()->setTemplate('product/edit.phtml')->setData($products);
-			$this->render();
-			// $row->setData($products);
-			// require_once 'view/product/edit.phtml';
+		$request = $this->getRequest();
+			$id=$request->getParam('product_id');
+			if(!$id)
+			{
+				throw new Exception("invalid Request", 1);
+				
+			}
+			$modelProduct = Ccc::getModel('Product_Row');
+			$query = "SELECT * FROM `product` WHERE `product_id`= '$id'";
+			$product =$modelProduct->fetchRow($query);
+			if(!$product)
+			{
+				throw new Exception('invalid id', 1);
+				
+			}
+			$layout = $this->getLayout();
+			$edit = $layout->createBlock('Product_Edit');
+			$edit->setData(['product' => $product]);
+			$layout->getChild('content')->addChild('edit',$edit);
+
+			$layout->render();
 	}
 
 	public function saveAction()
 	{
-		try {
-		$request=$this->getRequest();
-			$data = $request->getPost('product');
-			if (!$data) 
-			{
-				throw new Exception("Data not saved");
-			}
-			$id = $request->getParam('id');
-			if ($id) 
-			{
 				echo "<pre>";
-				$product=Ccc::getModel('Product_Row')->load($id);
-				$product->update_at=date('Y-m-d H:i:s');
-			}
-			else
-			{
-				$product= Ccc::getModel('Product_Row');
-				$product->create_at = date("Y-m-d h:i:s");
-			}
-			$product->setData($data);
-			$product->save();
-		}
-		catch(Exception $e){	
-				echo "catch found";
-		}
-		header("Location: index.php?c=product&a=grid");
 
-	}
+		$product = Ccc::getModel('Product_Row');
+					$request=$this->getRequest();
+					if (!$request->isPost()){
+				throw new Exception("Invalid Request", 1);
+					}
+					$products = $request->getPost('product');
+					if (!$products) {
+						throw new Exception("Data not posted", 1);
+					}
+					$id = $request->getParam('product_id');
+					if(!$id){
+						if(!$product->load($id)){
+							throw new Exception("Data not found.", 1);
+						}
+					}
+					$data = $product->setData($products);
+					if ($data->product_id) {
+						$data->update_at = date('Y-m-d h:i:sa');
+					}
+					else{
+						$data->create_at = date('Y-m-d h:i:sa');
+					}
+					$data = $product->save();
+		}
+		// catch(Exception $e){	
+		// 		echo "catch found";
+		// }
+		// header("Location: index.php?c=product&a=grid");
+
+	
 
 	public function deleteAction()
 	{

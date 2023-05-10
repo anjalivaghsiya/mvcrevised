@@ -1,0 +1,60 @@
+<?php
+require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
+// $data = $this->getData()->getTable()->getStatusOptions();
+// print_r($data);die;
+$category = $this->getData();
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>edit category</title>
+</head>
+<body>
+	<form action="index.php?c=category&a=save" method="POST">
+		<div class="row mt-3">
+			<div class="col-3">
+				<h3>EDIT category</h3>
+			</div>
+			<div class="col-3">
+				<button class="btn btn-primary">save</button>
+			</div>
+			
+		</div>
+		
+
+		<table>
+	
+			<tr>
+				<td>Name :</td>
+				<td>
+					<input type="text" name="category[name]">
+				</td>
+			</tr>
+			
+			<tr>
+					<td> Status</td>
+					<td> <select name="category[status]" >
+						<?php foreach ($category->getTable()->getStatusOptions() as $key => $value): ?>
+						<option value="<?php echo $key ?>"><?php echo $value ?></option>
+						<?php endforeach; ?>
+						
+					</select> </td>
+				</tr>
+			<tr>
+				<td>Description :</td>
+				<td>
+					<input type="text" name="category[description]" >
+				</td>
+			</tr>
+			
+			
+		</table>
+
+		
+	</form>
+
+</body>
+</html>

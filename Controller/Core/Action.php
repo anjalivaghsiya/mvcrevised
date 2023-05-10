@@ -10,6 +10,23 @@ class Controller_Core_Action
 	public $url = null;
 	public $request = null;
 	public $view = null;
+	public $layout = null;
+
+	public function setLayout(Block_Core_Layout $layout)
+	{
+		$this->layout = $layout;
+		return $this;
+	}
+
+	public function getLayout()
+	{
+		if ($this->layout) {
+			return $this->layout;
+		}
+		$layout = new Block_Core_layout();
+		$this->setLayout($layout);
+		return $layout;
+	}
 
 	public function setRequest(Model_Core_Request $request)
 	{
@@ -46,17 +63,17 @@ class Controller_Core_Action
 
 	public function getUrl()
 	{
-		if ($this->url) {
+		if ($this->url)
+		{
 			return $this->url;
 		}
-		$url = new Model_Core_Url();
+		$url=new Model_Core_Url();
 		$this->setUrl($url);
 		return $url;
 	}
-
-	public function setUrl($url)
+	public function setUrl(Model_Core_Url $url)
 	{
-		$this->url = $url;
+		$this->url =$url;
 		return $this;
 	}
 
@@ -84,5 +101,14 @@ class Controller_Core_Action
 	public function getTemplete($templetePath)
 	{
  		require_once 'View'.DS.$templetePath;
+	}
+
+	public function redirect($action=null,$controller=null, array $params=null,$reset = false,$url=null)
+	{
+		if($url == null){
+			$url = $this->getUrl()->getUrl($action,$controller,$params,$reset);
+		}
+		header("location: {$url}");
+		exit();
 	}
 }

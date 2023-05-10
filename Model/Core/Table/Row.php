@@ -117,6 +117,19 @@ class Model_Core_Table_Row
 		return $this;
 	}
 
+	public function setId($id)
+	{
+		$this->data[$this->getTable()->getPrimaryKey()] = $id;
+		return $this;
+		// print_r($this);
+	}
+
+	public function getId()
+	{
+		$primaryKey = $this->getTable()->getPrimaryKey();
+		return $this->$primaryKey;
+	}
+	
 	public function fetchAll($query)
 	{
 		$result = $this->getTable()->fetchAll($query);

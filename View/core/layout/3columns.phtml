@@ -9,13 +9,11 @@ $this->createBlock("Html_Head")->render();
 		<tr>
 			<td  height = "100" colspan="3" ><?php $this->getChild('header')->render(); ?></td>
 		</tr>
-		<tr>
-			<td colspan="3" height="40"><?php $this->getChild('message')->render(); ?></td>
-		</tr>
+		
 		<tr height ="250">
-			<td >left</td>
+			<!-- <td >left</td> -->
 			<td><?php $this->getChild('content')->render(); ?></td>
-			<td>Right</td>
+			<!-- <td>Right</td> -->
 		</tr>
 		<tr>
 			<td colspan="3" height="50">Footer</td>
