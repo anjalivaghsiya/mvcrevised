@@ -9,14 +9,12 @@ class Controller_Customer extends Controller_Core_Action
 		public function gridAction()
 	{
 		try {
-			$Row = Ccc::getModel('Customer_Row');
-			$query = "SELECT * FROM `customer`";
-			$customers = $Row->fetchAll($query);
-			if (!$customers) {
-				throw new Exception("Data not found.", 1);
-			}
-			$this->getView()->setTemplate('customer/grid.phtml')->setData($customers);
-			$this->render();
+				$layout = $this->getLayout();
+				$grid = $layout->createBlock('Customer_Grid');
+
+				$layout->getChild('content')->addChild('grid', $grid);
+				$layout->render();
+			
 		} catch (Exception $e) {
 			echo "Missed data.";
 		}
@@ -79,13 +77,22 @@ class Controller_Customer extends Controller_Core_Action
 	{
 		try 
 		{
-			$CustomerRow = Ccc::getModel('Customer_Row');
-			$CustomerAddressRow = Ccc::getModel('Customer_Address_Row');
 			$request = $this->getrequest();
 			$Customer_id = $request->getParam('customer_id');
+			if (!$Customer_id) {
+				throw new Exception("Invalid id.", 1);
+				
+			}
+			$CustomerRow = Ccc::getModel('Customer_Row');
+			$CustomerAddressRow = Ccc::getModel('Customer_Address_Row');
 			$Customer = $CustomerRow->load($Customer_id);
 			$CustomerAddress = $CustomerAddressRow->load($Customer_id,'Customer_id');
-			$this->getView()->setTemplate('Customer/edit.phtml')->setData(['Customer'=>$Customer, 'CustomerAddress'=>$CustomerAddress])->render();
+
+			$layout = $this->getLayout();
+			$edit = $layout->createBlock('Customer_Edit');
+			$edit->setData(['Customer'=>$Customer, 'CustomerAddress'=>$CustomerAddress]);
+			$layout->getChild('content')->addChild('edit',$edit);
+			$layout->render();
 		} 
 		catch (Exception $e) 
 		{

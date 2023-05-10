@@ -1,17 +1,8 @@
 <?php
-// echo "<pre>";
-require_once 'C:\xampp\htdocs\mvcrevised\View\html\header.phtml';
 $product = $this->getData('product');
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>edit prodcut</title>
-</head>
-<body>
+
 	<form action="index.php?c=product&a=save" method="POST">
 		<div class="row mt-3">
 			<div class="col-3">
@@ -21,7 +12,6 @@ $product = $this->getData('product');
 				<button class="btn btn-primary">save</button>
 			</div>
 		</div>
-		
 
 		<table>
 			<tr>
@@ -94,5 +84,3 @@ $product = $this->getData('product');
 		
 	</form>
 
-</body>
-</html>

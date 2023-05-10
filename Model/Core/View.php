@@ -8,7 +8,9 @@ class Model_Core_View
  	public function __construct()
  		{
  			// code...
- 		}	
+ 		}
+
+ 		
  	public function setTemplate($template)
  	{
  		$this->template = $template;
