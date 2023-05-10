@@ -9,14 +9,11 @@ class Controller_Vendor extends Controller_Core_Action
 	public function gridAction()
 	{
 		try {
-			$Row = Ccc::getModel('Vendor_Row');
-			$query = "SELECT * FROM `vendor`";
-			$vendor = $Row->fetchAll($query);
-			if (!$vendor) {
-				throw new Exception("Data not found.", 1);
-			}
-			$this->getView()->setTemplate('vendor/grid.phtml')->setData($vendor);
-			$this->render();
+			$layout = $this->getLayout();
+			$grid = $layout->createBlock('Vendor_Grid');
+			
+			$layout->getChild('content')->addChild('grid', $grid);
+			$layout->render();
 		} catch (Exception $e) {
 			echo "Missed data.";
 		}
@@ -80,13 +77,21 @@ class Controller_Vendor extends Controller_Core_Action
 	{
 		try 
 		{
+			$request = $this->getrequest();
+			$vendor_id = $request->getParam('vendor_id');
+			if (!$vendor_id) {
+				throw new Exception("Invalid id.", 1);
+			}
 			$vendorRow = Ccc::getModel('Vendor_Row');
 			$vendorAddressRow = Ccc::getModel('Vendor_Address_Row');
-			$request = $this->getrequest();
-			$vendor_id = $request->getParam('id');
 			$vendor = $vendorRow->load($vendor_id);
 			$vendorAddress = $vendorAddressRow->load($vendor_id,'vendor_id');
-			$this->getView()->setTemplate('vendor/edit.phtml')->setData(['vendor'=>$vendor, 'vendorAddress'=>$vendorAddress])->render();
+
+			$layout = $this->getLayout();
+			$edit = $layout->createBlock('Vendor_Edit');
+			$edit->setData(['vendor'=>$vendor, 'address'=>$vendorAddress]);
+			$layout->getChild('content')->addChild('edit', $edit);
+			$layout->render();
 		} 
 		catch (Exception $e) 
 		{

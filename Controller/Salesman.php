@@ -111,7 +111,7 @@ class Controller_Salesman extends Controller_Core_Action
 			if (!$request) {
 				throw new Exception("Invalid request", 1);
 			}
-			$salesman_id = $request->getParam('id');
+			$salesman_id = $request->getParam('salesman_id');
 			if (!$salesman_id) {
 				throw new Exception("Id not found", 1);
 			}
