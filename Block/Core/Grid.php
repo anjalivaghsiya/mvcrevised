@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 class Block_Core_Grid extends Block_Core_Template
 {

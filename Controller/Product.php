@@ -11,20 +11,9 @@ class Controller_Product extends Controller_Core_Action
 	 	 		$grid = new Block_Product_Grid();
 
 	 	 		$layout->getChild('content')->addChild('grid' , $grid);
-	 	 		// $grid->getCollection();
 	 	 		$layout->render();
 
-			// $row = Ccc::getModel('Product_Row');
-			// $query = "SELECT * FROM `product`";
-			// $products = $row->fetchAll($query);
-			// if (!$products) {
-			// 	throw new Exception("products not found.", 1);
-			// }
-			// $this->getView()->setTemplate('product/grid.phtml')->setData($products);
-			// $this->render();
-			// $products= $this->getData();
-			// print_r($products);die();
-			// require_once 'view/';
+			
 	}
 
 	public function addAction()
@@ -34,17 +23,7 @@ class Controller_Product extends Controller_Core_Action
 			$this->render();
 	}
 
-	public function insertAction()
-	{
-			$request = $this->getRequest();
-			$products = $request->getPost('product');
-			$row = Ccc::getModel('Product_Row');
-
-			$row->setData($products)->save();
-
-			
-			header("Location:index.php?c=Product&a=grid");
-	}
+	
 
 	public function editAction()
 	{

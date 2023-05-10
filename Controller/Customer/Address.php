@@ -8,17 +8,12 @@ class Controller_Customer_Address extends Controller_Core_Action
 	public function gridAction()
 	{
 		try {
-			$Row = Ccc::getModel('Customer_Address_Row');
-			$request = $this->getRequest();
-			if (!$request->isGet()) {
-				throw new Exception("Invalid request", 1);
-			}
-			$customerId  = $request->getParam('customer_id');
-			$query = "SELECT * FROM `customer_address` WHERE `customer_id` = '{$customerId}'";
-			$address = $Row->fetchRow($query);
+			$layout = $this->getLayout();
+			$grid = $layout->createBlock('Customer_Address_Grid');
 
-			$this->getView()->setTemplate('customer_address/grid.phtml')->setData($address);
-			$this->render();
+			$layout->getChild('content')->addChild('grid', $grid);
+				$layout->render();
+			
 			
 		} catch (Exception $e) {
 			echo "Data missed.";
